@@ -1,0 +1,57 @@
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    background-color: aliceblue;
+}
+
+.container{
+    height: 550px;
+    width: 800px;
+    background-color: aquamarine;
+    border-radius: 10px;
+    border: 1px dotted #000000;
+    margin: 40px auto;
+    padding: 30px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/*----for box---------*/
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: #000000;
+}
+
+.box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/*------for ランダム and カテゴリー　-----------*/
+.box1,.box2{
+    height: 150px;
+    margin: 30px auto;
+    transition: all 0.3s ease;
+    width: 80%;
+}
+
+/* ---------- for お気に入り　と　履歴を見る-------*/
+.second{
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+}
+.box3,.box4{
+    width: 300px;
+    height: 100px;
+   
+}
