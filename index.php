@@ -19,7 +19,7 @@
 		<div class="wrapper flex-box">
 			<div class="main-title">ペラペラオノマトペ</div>
 			<div class="main-links">
-				<a href="#" class="btn btn-main-menu">わくわくコース</a>
+				<a href="card.php" class="btn btn-main-menu">わくわくコース</a>
 			</div>
 			<div class="sub-links">
 				<a href="#" class="btn btn-sub-menu">ドキドキことば</a>

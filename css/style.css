@@ -6,10 +6,20 @@
 	--primary-blue: #03AED2;
 	--light-blue: #68D2E8;
 	--primary-yellow: #FDDE55;
+	--light-yellow: #FEEFAD;
 }
 
 html {
 	scroll-behavior: smooth;
+}
+
+img {
+	display: block;
+	width: 100%;
+}
+
+h1, h4, p {
+	margin: 0;
 }
 
 .flex-box {
@@ -22,7 +32,6 @@ html {
 	text-decoration: none;
 	outline: none;
 	border: none;
-	display: block;
 	font-weight: 900;
 	color: white;
 	position: relative;
@@ -39,23 +48,22 @@ body {
 	margin: 0;
 	font-family: "M PLUS Rounded 1c", sans-serif;
 	color: var(--primary-dark);
-}
-
-/* === Main Menu Page === */
-#main-menu {
 	height: 100vh;
 	background-color: var(--primary-yellow);
 }
 
-#main-menu main {
-	height: calc(100% - 60px);
-	width: calc(100% - 60px);
+main {
 	border-radius: 100px;
 	background-color: #fcfcfc;
 	box-sizing: border-box;
 	border: 10px solid var(--primary-dark);
 }
 
+/* === Main Menu Page === */
+#main-menu main {
+	height: calc(100% - 60px);
+	width: calc(100% - 60px);
+}
 #main-menu main .wrapper {
 	max-width: 1000px;
 	flex-flow: column;
@@ -70,31 +78,33 @@ body {
 }
 
 #main-menu main .btn-main-menu {
-	background-color: #03AED2;
+	background-color: var(--primary-blue);
 	font-size: 3rem;
 	padding: 25px 80px;
-	box-shadow: 0 6px #68D2E8;
+	box-shadow: 0 6px var(--light-blue);
+	display: block;
 }
 
 #main-menu main .btn-main-menu:hover {
-	box-shadow: 0 4px #68D2E8;
+	box-shadow: 0 4px var(--light-blue);
 	top: 2px;
 }
 
 #main-menu main .btn-sub-menu {
-	background-color: #68D2E8;
-	box-shadow: 0 6px #03AED2;
+	background-color: var(--light-blue);
+	box-shadow: 0 6px var(--primary-blue);
 	font-size: 1.4rem;
 	padding: 18px 36px;
+	display: block;
 }
 
 #main-menu main .btn-main-menu:hover {
-	box-shadow: 0 4px #03AED2;
+	box-shadow: 0 4px var(--primary-blue);
 	top: 2px;
 }
 
 #main-menu main .btn-sub-menu:hover {
-	box-shadow: 0 4px #68D2E8;
+	box-shadow: 0 4px var(--light-blue);
 	top: 2px;
 }
 
@@ -108,7 +118,112 @@ body {
 	text-align: center;
 }
 
-#main-menu .main-title {
+#main-menu .main-title, h1 {
 	font-size: 4.6rem;
 	font-weight: 900;
+}
+
+/* === Card Page === */
+#flash-card main {
+	height: calc(100% - 50px);
+	width: calc(100% - 50px);
+}
+
+#flash-card .wrapper {
+	flex-direction: column;
+	gap: 30px;
+	width: 90%;
+	height: 100%;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+#flash-card h1 {
+	line-height: 4.6rem;
+}
+
+#flash-card .title, 
+#onomatope-title {
+	text-align: center;
+}
+
+#onomatope-romaji {
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+#flash-card .image {
+	width: 80%;
+	justify-content: space-between;
+}
+
+#flash-card .btn-pre, #flash-card .btn-next {
+	outline: none;
+	border: none;
+	color: var(--primary-yellow);
+	font-size: 5rem;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	cursor: pointer;
+	background-color: transparent;
+}
+
+#flash-card .btn-pre:hover, #flash-card .btn-next:hover {
+	filter: brightness(90%) contrast(120%);
+}
+
+#flash-card .image img {
+	border-radius: 40px;
+	width: 350px;
+}
+
+#flash-card .text {
+	width: 100%;
+	font-size: 1.25rem;
+	font-weight: 500;
+}
+
+#flash-card .text .box {
+	padding: 10px 50px;
+	width: 500px;
+	border-radius: 10px;
+	border: 5px solid var(--primary-dark);
+}
+
+.btn-control {
+	position: fixed;
+	font-size: 1.25rem;
+	cursor: pointer;
+}
+
+.btn-top {
+	top: 70px;
+}
+
+.btn-bottom {
+	bottom: 70px;
+}
+
+.btn-left {
+	left: 70px;
+	background-color: var(--primary-blue);
+	box-shadow: 0 6px var(--light-blue);
+}
+
+.btn-right {
+	right: 70px;
+	background-color: var(--light-blue);
+	box-shadow: 0 6px var(--primary-blue);
+}
+
+.btn-round {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+}
+
+.btn-explanation {
+	height: 60px;
+	width: 120px;
 }
