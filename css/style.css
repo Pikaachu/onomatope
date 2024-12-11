@@ -131,7 +131,7 @@ main {
 
 #flash-card .wrapper {
 	flex-direction: column;
-	gap: 30px;
+	justify-content: space-between;
 	width: 90%;
 	height: 100%;
 	padding: 20px;
