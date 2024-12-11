@@ -1,59 +1,107 @@
+@charset "utf-8";
 
-/**------Css---------**/
-body{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-    background-color: aliceblue;
+/* === Common === */
+:root {
+	--primary-dark: #0c0c0c;
 }
 
-.container{
-    height: 550px;
-    width: 800px;
-    background-color: aquamarine;
-    border-radius: 10px;
-    border: 1px dotted #000000;
-    margin: 40px auto;
-    padding: 30px 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-/*----for box---------*/
-.box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #ffffff;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-decoration: none;
-    color: #000000;
+html {
+	scroll-behavior: smooth;
 }
 
-.box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.flex-box {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-/*------for ランダム and カテゴリー　-----------*/
-.box1,.box2{
-    height: 150px;
-    margin: 30px auto;
-    transition: all 0.3s ease;
-    width: 80%;
+body {
+	margin: 0;
+	font-family: "M PLUS Rounded 1c", sans-serif;
+	color: var(--primary-dark);
+	height: 100vh;
+	background-color: #FDDE55;
 }
 
-/* ---------- for お気に入り　と　履歴を見る-------*/
-.second{
-    width: 800px;
-    display: flex;
-    justify-content: space-between;
+main {
+	height: calc(100% - 60px);
+	width: calc(100% - 60px);
+	border-radius: 100px;
+	background-color: #fcfcfc;
+	box-sizing: border-box;
+	border: 10px solid var(--primary-dark);
 }
-.box3,.box4{
-    width: 300px;
-    height: 100px;
-   
+
+main .wrapper {
+	max-width: 1000px;
+	flex-flow: column;
+	gap: 60px;
+}
+
+main .sub-links {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 50px;
+}
+
+main .btn {
+	text-decoration: none;
+	outline: none;
+	border: none;
+	display: block;
+	font-weight: 900;
+	color: white;
+	position: relative;
+	border-radius: 20px;
+	text-align: center;
+	transition-duration: .2s;
+}
+
+.btn:hover {
+	filter: brightness(90%) contrast(120%);
+}
+
+main .btn-main-menu {
+	background-color: #03AED2;
+	font-size: 3rem;
+	padding: 25px 80px;
+	box-shadow: 0 6px #68D2E8;
+}
+
+main .btn-main-menu:hover {
+	box-shadow: 0 4px #68D2E8;
+	top: 2px;
+}
+
+main .btn-sub-menu {
+	background-color: #68D2E8;
+	box-shadow: 0 6px #03AED2;
+	font-size: 1.4rem;
+	padding: 18px 36px;
+}
+
+main .btn-main-menu:hover {
+	box-shadow: 0 4px #03AED2;
+	top: 2px;
+}
+
+main .btn-sub-menu:hover {
+	box-shadow: 0 4px #68D2E8;
+	top: 2px;
+}
+
+main .btn:active {
+	box-shadow: none;
+	top: 6px;
+}
+
+.main-title,
+.main-links {
+	text-align: center;
+}
+
+.main-title {
+	font-size: 4.6rem;
+	font-weight: 900;
 }
