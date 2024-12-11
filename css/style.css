@@ -3,6 +3,9 @@
 /* === Common === */
 :root {
 	--primary-dark: #0c0c0c;
+	--primary-blue: #03AED2;
+	--light-blue: #68D2E8;
+	--primary-yellow: #FDDE55;
 }
 
 html {
@@ -15,37 +18,7 @@ html {
 	justify-content: center;
 }
 
-body {
-	margin: 0;
-	font-family: "M PLUS Rounded 1c", sans-serif;
-	color: var(--primary-dark);
-	height: 100vh;
-	background-color: #FDDE55;
-}
-
-main {
-	height: calc(100% - 60px);
-	width: calc(100% - 60px);
-	border-radius: 100px;
-	background-color: #fcfcfc;
-	box-sizing: border-box;
-	border: 10px solid var(--primary-dark);
-}
-
-main .wrapper {
-	max-width: 1000px;
-	flex-flow: column;
-	gap: 60px;
-}
-
-main .sub-links {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	margin-top: 50px;
-}
-
-main .btn {
+.btn {
 	text-decoration: none;
 	outline: none;
 	border: none;
@@ -62,46 +35,80 @@ main .btn {
 	filter: brightness(90%) contrast(120%);
 }
 
-main .btn-main-menu {
+body {
+	margin: 0;
+	font-family: "M PLUS Rounded 1c", sans-serif;
+	color: var(--primary-dark);
+}
+
+/* === Main Menu Page === */
+#main-menu {
+	height: 100vh;
+	background-color: var(--primary-yellow);
+}
+
+#main-menu main {
+	height: calc(100% - 60px);
+	width: calc(100% - 60px);
+	border-radius: 100px;
+	background-color: #fcfcfc;
+	box-sizing: border-box;
+	border: 10px solid var(--primary-dark);
+}
+
+#main-menu main .wrapper {
+	max-width: 1000px;
+	flex-flow: column;
+	gap: 60px;
+}
+
+#main-menu main .sub-links {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 50px;
+}
+
+#main-menu main .btn-main-menu {
 	background-color: #03AED2;
 	font-size: 3rem;
 	padding: 25px 80px;
 	box-shadow: 0 6px #68D2E8;
 }
 
-main .btn-main-menu:hover {
+#main-menu main .btn-main-menu:hover {
 	box-shadow: 0 4px #68D2E8;
 	top: 2px;
 }
 
-main .btn-sub-menu {
+#main-menu main .btn-sub-menu {
 	background-color: #68D2E8;
 	box-shadow: 0 6px #03AED2;
 	font-size: 1.4rem;
 	padding: 18px 36px;
 }
 
-main .btn-main-menu:hover {
+#main-menu main .btn-main-menu:hover {
 	box-shadow: 0 4px #03AED2;
 	top: 2px;
 }
 
-main .btn-sub-menu:hover {
+#main-menu main .btn-sub-menu:hover {
 	box-shadow: 0 4px #68D2E8;
 	top: 2px;
 }
 
-main .btn:active {
+#main-menu main .btn:active {
 	box-shadow: none;
 	top: 6px;
 }
 
-.main-title,
-.main-links {
+#main-menu .main-title,
+#main-menu .main-links {
 	text-align: center;
 }
 
-.main-title {
+#main-menu .main-title {
 	font-size: 4.6rem;
 	font-weight: 900;
 }

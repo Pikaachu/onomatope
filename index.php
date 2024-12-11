@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="flex-box">
+<body class="flex-box" id="main-menu">
 	<main class="flex-box">
 		<div class="wrapper flex-box">
 			<div class="main-title">ペラペラオノマトペ</div>
