@@ -1,7 +1,7 @@
 <?php
 
 $dns = 'mysql:host=localhost; dbname=onomatope_db;';
-$user = 'kaito';
+$user = 'nomun';
 $password = 'password';
 $conn = null;
 
@@ -11,5 +11,3 @@ try {
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
-
-?>

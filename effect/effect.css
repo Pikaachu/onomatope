@@ -1,0 +1,274 @@
+#EffectContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+  
+  
+  /*---------キラキラ---------*/
+  .sparkle {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    animation: sparkle-animation 2.5s ease-out forwards;
+  }
+  
+  @keyframes sparkle-animation {
+    0% {
+      opacity: 1;
+      transform: scale(0.5) translate(0, 0);
+    }
+      80% {
+          opacity: 1;
+      }
+    100% {
+      opacity: 0;
+      transform: scale(2) translate(calc(var(--x) * 1px), calc(var(--y) * 1px));
+    }
+  }
+  
+  
+  /*---------トントン---------*/
+  .SVGImage {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 20%;
+    right: 30%;
+    margin-right: 10px;
+    transform: translateY(-50%);
+    z-index: 5;
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  @keyframes blinkAnimation {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0;
+      transform: scale(1.2);
+    }
+  }
+  
+  .blink {
+    animation: blinkAnimation 0.4s ease 1;
+  }
+  
+  .fade-out {
+    opacity: 0;
+  }
+  
+  
+  /*---------もやもや---------*/
+  #EffectContainer .moyamoya-img {
+    position: absolute;
+    top: 30%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    width: 160px;
+    height: 160px;
+    opacity: 0;
+    transition: opacity 0.02s ease-in-out;
+  }
+  
+  
+  /*---------ドキドキ---------*/
+  .dokidoki-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    animation: pulse 0.7s infinite;
+  }
+  
+  .heart {
+    height: 200px;
+    width: 140px;
+    margin-left: 45px;
+    background-color: hotpink;
+    border-radius: 50% 50% 0 0;
+    transform: rotate(50deg);
+    position: relative;
+    animation: shadow 0.7s infinite;
+  }
+  
+  .heart::after {
+    position: absolute;
+    top: 50px;
+    left: -40px;
+    content: '';
+    height: inherit;
+    width: inherit;
+    background-color: inherit;
+    border-radius: inherit;
+    transform: rotate(-100deg);
+    animation: shadow 0.7s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    70% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes shadow {
+    0% {
+      box-shadow: 0 0 0 0 hotpink;
+    }
+    50% {
+      box-shadow: 0 0 5px 0 hotpink;
+    }
+    70% {
+      box-shadow: 0 0 10px 5px hotpink;
+    }
+    95% {
+      box-shadow: 0 0 90px 1px hotpink;
+    }
+  }
+  
+  
+  /*---------ふわふわ---------*/  
+  .cloud {
+    position: absolute;
+    width: 650px; 
+    height: 200px; 
+    background-image: url("../images/fuwafuwa/fuwafuwa.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1;
+    animation: floatCloud 2s ease-in-out infinite;
+    z-index: 1;
+  }
+  
+  .cloud.reverse {
+    transform: scaleX(-1);
+  }
+  
+  @keyframes floatCloud {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-50px);
+    }
+    100% {
+      transform: translateY(0);
+      }
+  }
+  
+  
+  /*---------ザーザー---------*/
+  #zazaCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+  }
+  
+  
+  /*---------アツアツ---------*/ 
+  #atuatuCanvas {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    z-index: 9999;
+  }
+      
+  
+  /*---------パチパチ---------*/
+  .clap-wrap {
+      text-align: center;
+  }
+  .clapping{
+    width:40%;
+  }
+  
+  .left-hand{fill:#C8902B;}
+  .right-hand{fill:#FFCE00;}
+  .sound{fill:none;stroke:#FFCE00;stroke-width:12;stroke-linecap:round;stroke-miterlimit:10;}
+  
+  .left-hand{
+    transform-origin: 114px 67px;
+    animation: move-down 0.3s ease infinite;
+  }
+  
+  @keyframes move-down {
+    0%{
+      transform:translate(0,0);
+    }
+    50%{ transform:translate(30px,30px);}
+    100%{ transform:translate(0,0);}
+  }
+  
+  .right-hand{
+    transform-origin:center center;
+    animation: move-up 0.3s ease infinite;
+  }
+  
+  @keyframes move-up {
+    0%{
+      transform:translate(0,0);
+    }
+    50%{ transform:translate(-25px,-25px);}
+    100%{ transform:translate(0,0);}
+  }
+  
+  .sound {
+    animation: sound-wave 0.3s ease infinite;
+  }
+  
+  .sound1{
+    transform-origin:-154.9px 185.4px;
+  }
+  .sound2{
+    transform-origin:-120.4px 151.4px;
+  }
+  .sound3{
+    transform-origin:-77.3px 135.1px;
+  }
+  .sound4{
+    transform-origin:-3px 183.4px;
+  }
+  .sound5{
+    transform-origin:-35.4px 152.4px;
+  }
+  .sound6{
+    transform-origin:21px 217.4px;
+  }
+  
+  @keyframes sound-wave{
+    0%{
+      transform:scale(0);
+    }
+    50%{
+      transform:scale(1);
+    }
+    100%{
+      transform:scale(0);
+    }
+}

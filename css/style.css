@@ -53,19 +53,14 @@ body {
 }
 
 main { 
-   /* border-radius: 100px; 
-    background-color: #fcfcfc; 
-    box-sizing: border-box; 
-    border: 10px solid var(--primary-dark);*/
-    /*height: calc(100% - 60px); 
-    width: calc(100% - 60px);*/
     background-color: #fcfcfc;
-    border-radius: 100px; /* Softer corners for flash cards */
-    border: 10px solid var(--primary-dark); /* Slightly thinner border */
+    border-radius: 100px; 
+    border: 10px solid var(--primary-dark); 
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* === Main Menu Page === */
+
 #main-menu main { 
     height: calc(100% - 60px); 
     width: calc(100% - 60px); 
@@ -130,18 +125,36 @@ main {
     font-weight: 900; 
 }
 /* === Card Page === */
+
 #flash-card main {
-	height: calc(100% - 50px);
-	width: calc(100% - 50px);
+    height: calc(100% - 50px);
+    width: calc(100% - 50px);
+    padding: 20px;
+    gap: 20px;
+    box-sizing: border-box;
+    flex-direction: column;
+    position: relative;
 }
 
 #flash-card .wrapper {
-	flex-direction: column;
-	justify-content: space-between;
-	width: 90%;
-	height: 100%;
-	padding: 20px;
-	box-sizing: border-box;
+	overflow: hidden;
+}
+ 
+#flash-card .card {
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90%;
+    height: 100%;
+    box-sizing: border-box;
+    box-sizing: border-box;
+    gap: 20px;
+	display: none;
+}
+#flash-card .card.active {
+	display: flex;
+	width: 500px;
+    align-items: center; 
+    justify-content: center; 
 }
 
 #flash-card h1 {
@@ -160,23 +173,31 @@ main {
 
 #flash-card .image {
 	width: 80%;
-	justify-content: space-between;
 }
 
-#flash-card .btn-pre, #flash-card .btn-next {
-	outline: none;
-	border: none;
-	color: var(--primary-yellow);
-	font-size: 5rem;
-	width: 60px;
-	height: 60px;
-	border-radius: 50%;
-	cursor: pointer;
-	background-color: transparent;
+#flash-card .btn-pre-next {
+    outline: none;
+    border: none;
+    color: var(--primary-yellow);
+    font-size: 5rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: transparent;
+    position: absolute;
 }
-
-#flash-card .btn-pre:hover, #flash-card .btn-next:hover {
-	filter: brightness(90%) contrast(120%);
+ 
+#flash-card .btn-pre-next:hover {
+    filter: brightness(90%) contrast(120%);
+}
+ 
+#btn-prev {
+    left: 50px;
+}
+ 
+#btn-next {
+    right: 50px;
 }
 
 #flash-card .image img {
@@ -195,6 +216,13 @@ main {
 	width: 500px;
 	border-radius: 10px;
 	border: 5px solid var(--primary-dark);
+}
+
+.card img.category-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
 }
 
 .btn-control {
@@ -234,6 +262,7 @@ main {
 	width: 120px;
 }
 /* === Voice command section === */
+
 #voice-toggle {
     border: none;
     color: white;
@@ -270,3 +299,87 @@ main {
     text-align: center;
     opacity: 0.7;
 }
+
+/* === Category section === */
+
+#category-list{
+	display: none;
+}
+
+/* === Explanation section === */
+
+#explanation-popup {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: var(--primary-yellow);
+	border: 10px solid var(--primary-dark);
+	border-radius: 20px;
+	width: 80%;
+	max-width: 600px;
+	padding: 20px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+	text-align: center;
+	}
+
+#explanation-popup h2 {
+	color: var(--primary-blue);
+	margin-bottom: 15px;
+}
+
+#explanation-popup p {
+	line-height: 1.6;
+	margin-bottom: 15px;
+}
+
+#close-explanation {
+	background-color: var(--primary-blue);
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 15px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+#close-explanation:hover {
+	background-color: var(--light-blue);
+}
+
+/* Overlay for popup */
+
+#popup-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(77, 77, 77, 0.5);
+	z-index: 999;
+}
+
+/* マイクの ON & OFF*/
+.fa-microphone.listening {
+    color: red;  /* Change the microphone color to red when it's listening */
+    animation: pulse 1s infinite;  /* Optional: Add a pulsing effect for attention */
+}
+
+/* Optional animation for pulsing effect */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+		
