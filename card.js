@@ -39,7 +39,13 @@ document.addEventListener("DOMContentLoaded", function () {
 	// Data Fetching and Carousel
 	// -----------------------------
 	function fetchData(categoryId = 0) {
-	  const xhr = new XMLHttpRequest();
+	const xhr = new XMLHttpRequest();
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const category = urlParams.get('category')
+	if (category) {
+		categoryId = category;
+	}
 	  xhr.open("GET", `db_get_onomatope.php?category_id=${categoryId}`, true);
 	  xhr.onload = function () {
 		if (xhr.status === 200) {

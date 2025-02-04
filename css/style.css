@@ -382,4 +382,120 @@ main {
 }
 
 
-		
+/* === Category section === */
+.category-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.box-container {
+    text-align: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 0px;
+    margin-top: 95px;
+    padding-bottom: 10px;
+}
+
+.box-c {
+    width: 350px;
+    height: 125px;
+    background-color: var(--primary-blue);
+    line-height: 120px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    position: relative;
+    z-index: 1000;
+}
+
+.top-left {
+    border-top-left-radius: 50px;
+    box-shadow: 0 -6px var(--light-blue);
+    border-bottom: 5px solid #fff;
+    border-right: 5px solid #fff;
+}
+
+.top-left:hover {
+    box-shadow: 0px 0px var(--primary-blue);
+    top: 2px;
+}
+
+.top-right {
+    border-top-right-radius: 50px;
+    box-shadow: 0 -6px var(--light-blue);
+    border-bottom: 5px solid #fff;
+    /* border-left:5px solid #fff; */
+
+}
+
+.top-right:hover {
+    box-shadow: 0px 0px var(--priamry-blue);
+    top: 2px;
+
+}
+
+/* for bottom  */
+.bottom-left {
+    border-bottom-left-radius: 50px;
+    box-shadow: 0px 6px var(--light-blue);
+    border-right: 5px solid #fff;
+
+}
+
+.bottom-left:hover {
+    box-shadow: 0px 0px var(--primary-blue);
+    bottom: 2px;
+}
+
+.bottom-right {
+    border-bottom-right-radius: 50px;
+    box-shadow: 0px 6px var(--light-blue);
+    /* border-top:5px solid #fff;  */
+}
+
+.bottom-right:hover {
+    box-shadow: 0px 0px var(--primary-blue);
+    bottom: 2px;
+}
+/* for image  */
+.effect-image {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    /* Start with 0 width */
+    height: 0;
+    /* Start with 0 height */
+    opacity: 0;
+    transition: width 1s ease, height 1s ease, opacity 0.5s ease;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Initial state: Images are faint but visible */
+.hover-image {
+    position: fixed;
+    width: 800px;
+    opacity: 0.3;
+    transition: opacity 0.3s ease-in-out;
+    display: block;
+}
+
+/* On hover: Make the corresponding image fully visible */
+.box-c:hover~#hover-image-1,
+.box-c:hover~#hover-image-2,
+.box-c:hover~#hover-image-3,
+.box-c:hover~#hover-image-4 {
+    opacity: 1;
+}
+
+#btn-category {
+    left: 140px;
+}

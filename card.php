@@ -40,8 +40,8 @@
 			</div>
 		</div>
 		<!-- 左右ボタン -->
-		<button class="btn-pre-next" id="btn-prev"><i class="fa-solid fa-caret-left"></i></button>
-		<button class="btn-pre-next" id="btn-next"><i class="fa-solid fa-caret-right"></i></button>
+		<button class="btn-pre-next" id="btn-prev" title="前"><i class="fa-solid fa-caret-left"></i></button>
+		<button class="btn-pre-next" id="btn-next" title="次"><i class="fa-solid fa-caret-right"></i></button>
 		<div id="EffectContainer"></div>
 		</div>
 
@@ -62,10 +62,11 @@
 	</div>
 
 	<!-- buttons -->
-	<a href="index.php" class="btn btn-top btn-left btn-control btn-round flex-box"><i class="fa-solid fa-house"></i></a>
-	<button id="btn-effect" class="btn btn-top btn-right btn-control btn-round"><i class="fa-solid fa-volume-low"></i></button>
-	<button class="btn btn-bottom btn-left btn-control btn-explanation">説明</button>
-	<button class="btn btn-bottom btn-right btn-control btn-round"><i class="fa-solid fa-heart"></i></button>
+	<a href="index.php" class="btn btn-top btn-left btn-control btn-round flex-box" title="ホーム"><i class="fa-solid fa-house"></i></a>
+	<a href="category.php" class="btn btn-top btn-left btn-control btn-round flex-box" id="btn-category" title="カテゴリー"><i class="fa-solid fa-list"></i></a>
+	<button id="btn-effect" class="btn btn-top btn-right btn-control btn-round" title="音声"><i class="fa-solid fa-volume-low"></i></button>
+	<button class="btn btn-bottom btn-left btn-control btn-explanation" title="説明">説明</button>
+	<button class="btn btn-bottom btn-right btn-control btn-round" title="お気に入り"><i class="fa-solid fa-heart"></i></button>
 
 	<!-- js -->
 	<script src="https://kit.fontawesome.com/9670cd3151.js" crossorigin="anonymous"></script>

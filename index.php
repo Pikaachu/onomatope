@@ -21,8 +21,8 @@
                 <a href="card.php" class="btn btn-main-menu">わくわくコース</a>
             </div>
             <div class="sub-links">
-                <a href="#" class="btn btn-sub-menu">ドキドキことば</a>
-                <a href="quiz.php" class="btn btn-sub-menu">コツコツクイズ</a>
+                <a href="category.php" class="btn btn-sub-menu">カテゴリー</a>
+                <a href="quiz.php" class="btn btn-sub-menu">ドキドキクイズ</a>
             </div>
             
             <button id="voice-toggle">音声コマンドをオン</button>
