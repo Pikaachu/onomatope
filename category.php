@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        
 
         /* Horizontal and Vertical Lines */
         main::before,
@@ -93,18 +92,12 @@
 
                     <!-- buttons -->
                     <a href="index.php" class="btn btn-top btn-left btn-control btn-round flex-box" style="z-index: 1000"><i class="fa-solid fa-house"></i></a>
-                    <button class="btn btn-top btn-right btn-control btn-round" style="z-index: 1000"><i class="fa-solid fa-volume-low"></i></button>
                 </div>
 
             </div>
 
             <!-- for マイク  -->
-            <div class="text flex-box">
-                <div class="box">
-                    <i class="fa-solid fa-microphone" id="mic-icon"></i>
-                    <span id="user-speech">マイクをONにして話してみてください！</span>
-                </div>
-            </div>
+            <button id="voice-toggle">音声コマンドをオン</button>
         </main>
         
         <!-- js -->
