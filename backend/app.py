@@ -12,7 +12,7 @@ app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Load Vokaturi emotion detection library
-Vokaturi.load("/var/www/html/onomatope_ajax_boraaaa/backend/OpenVokaturi-4-0-linux.so")
+Vokaturi.load("/var/www/html/onomatope/backend/OpenVokaturi-4-0-linux.so")
 
 @app.route('/')
 def index():

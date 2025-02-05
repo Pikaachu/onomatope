@@ -249,15 +249,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
         /* resultDiv.textContent = `Emotion: ${dominantEmotion} (${emotionPercentage})`;*/
 
-        if (dominantEmotion == "Happiness") {
-            resultDiv.textContent = `フィードバック: すごく良い感じ`;
+        if (dominantEmotion == "元気もりもり") {
+            resultDiv.textContent = `フィードバック: すごく良い感じ！`;
 
             dynamicText.style.color = "green";
 
 
         }
+        if (dominantEmotion === "とても元気") {
+            resultDiv.textContent = `フィードバック: 良い感じ！`;
+
+            dynamicText.style.color = "green";
+        }
+
+        if (dominantEmotion === "元気") {
+            resultDiv.textContent = `フィードバック: いいね！`;
+
+            dynamicText.style.color = "green";
+        }
+
+        if (dominantEmotion === "穏やか") {
+            resultDiv.textContent = `フィードバック: 頑張ろう！`;
+
+            dynamicText.style.color = "green";
+        }
         else {
-            resultDiv.textContent = `フィードバック: もっと元気に出してね!`;
+            resultDiv.textContent = `フィードバック: もっと元気に出してね！`;
 
 
         }

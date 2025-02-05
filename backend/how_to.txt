@@ -9,3 +9,18 @@
 
 to check the version 
 pip freeze
+
+
+#dont forget to download the requirements and ffpmeg
+sudo apt-get install ffmpeg
+
+
+
+
+######################################################################################
+やり方: 
+####cmd####
+
+ source /var/www/html/onomatope/myenv/bin/activate
+ cd backend 
+ python3 app.py
