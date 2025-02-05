@@ -1,13 +1,8 @@
-
-
 // Declare a variable to hold the fetched data and the current index
-
 const nextButton = document.getElementById("btn-next");
 
 let data = [];
 let currentIndex = 0;
-
-
 
 // Fetch the data from the PHP script when the button is clicked
 document.querySelector('.btn').addEventListener('click', function() {
@@ -48,17 +43,46 @@ function loadPopupContent(index) {
 }
 
 // Next button functionality
-document.getElementById('btn-next').addEventListener('click', function() {
-  // Move to the next example
-  currentIndex++;
+nextButton.addEventListener('click', function() {
+  // Check if the data is loaded
+  if (data.length === 0) {
+    // If data is not loaded yet, fetch it first
+    fetch('../db_get_onomatope.php')
+      .then(response => response.json())
+      .then(fetchedData => {
+        if (fetchedData.error) {
+          alert(fetchedData.error);
+        } else {
+          // Store the fetched data globally
+          data = fetchedData;
 
-  // If we've reached the end of the array, loop back to the first item
-  if (currentIndex >= data.length) {
-    currentIndex = 0;
+          // Move to the next example
+          currentIndex++;
+
+          // If we've reached the end of the array, loop back to the first item
+          if (currentIndex >= data.length) {
+            currentIndex = 0;
+          }
+
+          // Load the content for the new index
+          loadPopupContent(currentIndex);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  } else {
+    // Move to the next example
+    currentIndex++;
+
+    // If we've reached the end of the array, loop back to the first item
+    if (currentIndex >= data.length) {
+      currentIndex = 0;
+    }
+
+    // Load the content for the new index
+    loadPopupContent(currentIndex);
   }
-
-  // Load the content for the new index
-  loadPopupContent(currentIndex);
 });
 
 // Close the popup

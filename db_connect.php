@@ -1,7 +1,7 @@
 <?php
 
 $dns = 'mysql:host=localhost; dbname=onomatope_db;';
-$user = 'nomun';
+$user = 'chhengnay';
 $password = 'password';
 $conn = null;
 

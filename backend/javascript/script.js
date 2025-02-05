@@ -44,14 +44,14 @@ document.addEventListener("DOMContentLoaded", function () {
         imgBox.innerHTML = "";
         percentEmo.textContent = "";
         resultDiv.textContent = `フィードバック:`;
-        
+
         userSpeechElement.textContent = "";
         dynamicText.textContent = "オノマトペを当ててみて！";
         dynamicText.style.color = "black";
         dynamicText.style.fontWeight = "bold";
         dynamicText.style.fontSize = "24px";
         emoteImage.src = "../images/emotion/happy1.png";
-     
+
 
 
 
@@ -194,10 +194,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Socket listener for word correctness result
     socket.on('word_correctness_result', (data) => {
 
-    const correctAudio = new Audio('sounds/correct.mp3');  
-    const incorrectAudio = new Audio('sounds/incorrect.mp3');  
-    correctAudio.volume = 1;
-    incorrectAudio.volume = 0.6;
+        const correctAudio = new Audio('sounds/correct.mp3');
+        const incorrectAudio = new Audio('sounds/incorrect.mp3');
+        correctAudio.volume = 1;
+        incorrectAudio.volume = 0.6;
 
 
         if (data.result === "correct") {
@@ -208,6 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
             emoteImage.src = "../images/emotion/happy2.png";
 
             correctAudio.play();
+            setTimeout(loadNextImage, 2000);
 
         } else {
             dynamicText.textContent = "残念!";
@@ -249,18 +250,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         /* resultDiv.textContent = `Emotion: ${dominantEmotion} (${emotionPercentage})`;*/
 
-        if (dominantEmotion == "Happiness") {
-            resultDiv.textContent = `フィードバック: すごく良い感じ`;
-
+        if (dominantEmotion === "元気もりもり") {
+            resultDiv.textContent = `フィードバック: すごく良い感じ！`;
             dynamicText.style.color = "green";
-
-
+        } else if (dominantEmotion === "とても元気") {
+            resultDiv.textContent = `フィードバック: 良い感じ！`;
+            dynamicText.style.color = "green";
+        } else if (dominantEmotion === "元気") {
+            resultDiv.textContent = `フィードバック: いいね！`;
+            dynamicText.style.color = "green";
+        } else if (dominantEmotion === "穏やか") {
+            resultDiv.textContent = `フィードバック: 頑張ろう！`;
+            dynamicText.style.color = "green";
+        } else {
+            resultDiv.textContent = `フィードバック: もっと元気に出してね！`;
         }
-        else {
-            resultDiv.textContent = `フィードバック: もっと元気に出してね!`;
-
-
-        }
+        
 
 
         /* console.log(emotionPercentage);
