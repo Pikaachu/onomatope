@@ -1,0 +1,391 @@
+@charset "utf-8";
+
+/* === Common === */
+:root {
+    --primary-dark: #0c0c0c;
+    --primary-blue: #03AED2;
+    --light-blue: #68D2E8;
+    --primary-yellow: #FDDE55;
+    --light-yellow: #FEEFAD;
+}
+
+body {
+    margin: 0;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    color: var(--primary-dark);
+    height: 100vh;
+    background-color: var(--primary-yellow);
+}
+
+
+h1,
+h4,
+p {
+    margin: 0;
+}
+
+h1 {
+    font-size: 4.6rem;
+    font-weight: 900;
+}
+
+
+#btn-next {
+    margin-right: 100px;
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    /* Prevent title from being flex item */
+    flex: 0 0 auto;
+    /* Prevent it from growing or shrinking */
+    margin-right: auto;
+    /* Optional: keeps the title aligned to the left */
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+img.emote {
+    width: 80px;
+    margin-top: 20px;
+}
+
+/* Flexbox Utilities */
+.flex-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    /*gap: 80px;*/
+}
+
+.first-child {
+    flex: 0 0 auto;
+}
+
+/* === Main Styles === */
+main {
+    background-color: #fcfcfc;
+    border-radius: 100px;
+    border: 10px solid var(--primary-dark);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+#flash-card .text .box {
+    padding: 10px 50px;
+    width: 800px;
+    border-radius: 10px;
+    border: 5px solid var(--primary-dark);
+    margin-bottom: 20px;
+}
+
+#flash-card .text {
+    width: 80%;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+/* Buttons */
+.btn {
+    text-decoration: none;
+    outline: none;
+    border: none;
+    font-weight: 900;
+    color: white;
+    position: relative;
+    border-radius: 20px;
+    text-align: center;
+    transition-duration: .2s;
+}
+
+.btn:hover {
+    filter: brightness(90%) contrast(120%);
+}
+
+.btn-round {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.btn-control {
+    position: fixed;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.btn-top {
+    top: 70px;
+}
+
+.btn-bottom {
+    bottom: 70px;
+}
+
+.btn-left {
+    left: 70px;
+    background-color: var(--primary-blue);
+    box-shadow: 0 6px var(--light-blue);
+}
+
+.btn-right {
+    right: 70px;
+    background-color: var(--light-blue);
+    box-shadow: 0 6px var(--primary-blue);
+}
+
+.btn-round:hover {
+    filter: brightness(90%) contrast(120%);
+}
+
+/* === Voice Command Section === */
+#voice-toggle {
+    flex-basis: 100%;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    transition-duration: .2s;
+    cursor: pointer;
+    background-color: var(--light-blue);
+    box-shadow: 0 6px var(--primary-blue);
+    font-size: 1rem;
+    font-weight: 900;
+    margin-left: 460px;
+    margin-right: 560px;
+    margin-bottom: -50px;
+}
+
+#voice-toggle:hover {
+    filter: brightness(90%) contrast(120%);
+}
+
+#voice-toggle.listening {
+    background-color: #F44336;
+    box-shadow: 0 6px #ff7961;
+}
+
+#voice-status {
+    color: var(--primary-dark);
+    font-size: 1rem;
+    text-align: center;
+    opacity: 0.7;
+}
+
+/* === Microphone ON & OFF === */
+.fa-microphone.listening {
+    color: red;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* === Flash Card Page === */
+#flash-card main {
+    height: calc(100% - 30px);
+    width: calc(100% - 30px);
+    padding: 60px 80px 60px 180px;
+
+    box-sizing: border-box;
+    position: relative;
+}
+
+#flash-card .wrapper {
+    overflow: hidden;
+}
+
+#flash-card .card {
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90%;
+    height: 100%;
+    box-sizing: border-box;
+    gap: 20px;
+    display: none;
+}
+
+#flash-card .card.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#flash-card .image {
+    width: 80%;
+}
+
+#flash-card .btn-pre-next {
+    outline: none;
+    border: none;
+    color: var(--primary-yellow);
+    font-size: 6.5rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: transparent;
+    position: absolute;
+}
+
+#flash-card .btn-pre-next:hover {
+    filter: brightness(90%) contrast(120%);
+}
+
+#btn-prev {
+    left: 0;
+}
+
+#btn-next {
+    right: 0;
+}
+
+#flash-card .image img {
+    border-radius: 40px;
+    width: 350px;
+}
+
+.card img.category-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+main {
+    /*background-image: url(../images/emotion/well.jpg);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: 25px;
+    background-size: 15%; */
+    
+}
+
+img {
+    border-radius: 40px;
+    width: 350px;
+}
+
+.no-flex {
+  text-align: center;
+    flex-basis: 100%;
+    /* Prevent the first item from flexing */
+    font-size: 4.6rem;
+    font-weight: 900;
+    margin-bottom: -80px;
+    margin-top: -100px;
+    margin-right: 90px;
+
+}
+h1{
+    font-family: "M PLUS Rounded 1c", sans-serif;
+}
+
+.no-flex:not(.no-flex) {
+    flex: 1;
+    /* Allow other items to flex */
+}
+
+.flex-box-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.right-hand{
+    margin-left: 50px;
+}
+
+
+/*pop up*/
+
+#explanation-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--primary-yellow);
+    border: 10px solid var(--primary-dark);
+    border-radius: 20px;
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+}
+
+#explanation-popup h2 {
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+}
+
+#explanation-popup p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+#close-explanation {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#close-explanation:hover {
+    background-color: var(--light-blue);
+}
+
+/* Overlay for popup */
+#popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(77, 77, 77, 0.5);
+    z-index: 999;
+}
+
+
+
+#power1{
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  padding-top: 5px;
+  align-items: center;
+  text-align: center;
+  display: flex;
+}
+
+
+@media screen and (max-width: 1500px){
+    #voice-toggle{
+        margin-bottom: 1px;
+        margin-right: 200px;
+    }
+    #flash-card main{
+        padding: 30px 30px 0px 80px;
+    }
+}

@@ -1,0 +1,11 @@
+#load the venv
+-> source myenv/bin/activate
+#Enter the folder 
+->  cd "backend"
+#Run the app.py
+->  python3 app.py
+
+# Load this in browswer ("http://localhost/onomatope/Emote_speech/index.php")
+
+to check the version 
+pip freeze

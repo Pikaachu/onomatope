@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100;500&display=swap");
+
+
+
+.progress-bar {
+    margin-top: 10px;
+  
+    position: relative;
+    height: 20px;
+    width: 420px;
+    background: var(--primary-dark);
+    border-radius: 25px;
+    border: 2px solid var(--primary-dark);
+    box-shadow: 0 0 32px var(--primary-blue);
+}
+
+.progress-fill {
+    position: absolute;
+    height: 20px;
+    width: 20%;
+    background: linear-gradient(90deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+    border-radius: 15px;
+    transition: width 0.5s ease;
+}
+
+#dynamic-text {
+    margin: auto;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
