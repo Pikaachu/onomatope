@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", function () {
             emoteImage.src = "../images/emotion/happy2.png";
 
             correctAudio.play();
-            setTimeout(loadNextImage, 2000);
+            setTimeout(loadNextImage, 4000);
 
         } else {
             dynamicText.textContent = "残念!";
