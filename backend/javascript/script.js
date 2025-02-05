@@ -6,10 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-
-
     const mic = document.querySelector(".mic-button");
     const voiceToggle = document.getElementById('voice-toggle');
 

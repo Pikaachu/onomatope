@@ -1,9 +1,9 @@
 // Declare a variable to hold the fetched data and the current index
 const nextButton = document.getElementById("btn-next");
-
+ 
 let data = [];
 let currentIndex = 0;
-
+ 
 // Fetch the data from the PHP script when the button is clicked
 document.querySelector('.btn').addEventListener('click', function() {
   fetch('../db_get_onomatope.php')
@@ -14,10 +14,10 @@ document.querySelector('.btn').addEventListener('click', function() {
       } else {
         // Store the data globally
         data = fetchedData;
-
+ 
         // Load the first item into the popup
         loadPopupContent(currentIndex);
-
+ 
         // Show the popup and overlay
         document.getElementById('popup-overlay').style.display = 'block';
         document.getElementById('explanation-popup').style.display = 'block';
@@ -27,12 +27,12 @@ document.querySelector('.btn').addEventListener('click', function() {
       console.error('Error fetching data:', error);
     });
 });
-
+ 
 // Function to load content into the popup based on the current index
 function loadPopupContent(index) {
   const popupExplanation = document.getElementById('popup-explanation');
   popupExplanation.innerHTML = ''; // Clear previous content
-
+ 
   // If there's data to display
   if (data.length > 0 && data[index]) {
     const item = data[index];
@@ -41,7 +41,7 @@ function loadPopupContent(index) {
     popupExplanation.appendChild(p);
   }
 }
-
+ 
 // Next button functionality
 nextButton.addEventListener('click', function() {
   // Check if the data is loaded
@@ -55,15 +55,15 @@ nextButton.addEventListener('click', function() {
         } else {
           // Store the fetched data globally
           data = fetchedData;
-
+ 
           // Move to the next example
           currentIndex++;
-
+ 
           // If we've reached the end of the array, loop back to the first item
           if (currentIndex >= data.length) {
             currentIndex = 0;
           }
-
+ 
           // Load the content for the new index
           loadPopupContent(currentIndex);
         }
@@ -74,19 +74,20 @@ nextButton.addEventListener('click', function() {
   } else {
     // Move to the next example
     currentIndex++;
-
+ 
     // If we've reached the end of the array, loop back to the first item
     if (currentIndex >= data.length) {
       currentIndex = 0;
     }
-
+ 
     // Load the content for the new index
     loadPopupContent(currentIndex);
   }
 });
-
+ 
 // Close the popup
 document.getElementById('close-explanation').addEventListener('click', function() {
   document.getElementById('popup-overlay').style.display = 'none';
   document.getElementById('explanation-popup').style.display = 'none';
 });
+ 
