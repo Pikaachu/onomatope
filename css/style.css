@@ -135,10 +135,6 @@ main {
     flex-direction: column;
     position: relative;
 }
-
-#flash-card .wrapper {
-	overflow: hidden;
-}
  
 #flash-card .card {
     flex-direction: column;
