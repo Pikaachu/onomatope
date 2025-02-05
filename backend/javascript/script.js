@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Speech recognition started...");
 
 
-            voiceToggle.textContent = '音声コマンドをオフ';
+            voiceToggle.textContent = 'マイク使用中';
             voiceToggle.classList.add('listening');
 
             startRecording();
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Stop audio recording
 
             voiceToggle.classList.remove('listening');
-            voiceToggle.textContent = '音声コマンドをオン';
+            voiceToggle.textContent = 'マイクオン';
             stopRecording();
         };
     } else {

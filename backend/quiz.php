@@ -70,7 +70,7 @@
             <div id="result">フェッドバック:</div>
         </div>
 
-        <button class="mic-button" id="voice-toggle">音声コマンドをオン</button>
+        <button class="mic-button" id="voice-toggle">マイクオン</button>
 
     </main>
 
