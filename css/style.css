@@ -135,6 +135,10 @@ main {
     flex-direction: column;
     position: relative;
 }
+
+#flash-card .wrapper {
+	overflow: hidden;
+}
  
 #flash-card .card {
     flex-direction: column;
@@ -431,7 +435,7 @@ main {
 }
 
 .top-right:hover {
-    box-shadow: 0px 0px var(--priamry-blue);
+    box-shadow: 0px 0px var(--primary-blue);
     top: 2px;
 
 }
