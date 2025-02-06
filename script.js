@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const links = {
         'わくわく': 'card.php',
         'わくわくコース': 'card.php',
-        'ドキドキ': 'category.php',
+        'カテゴリー': 'category.php',
         'ドキドキカテゴリー': 'category.php',
-        'コツコツ': 'backend/quiz.php',
+        'クイズ': 'backend/quiz.php',
         'コツコツクイズ': 'backend/quiz.php'
     };
 
