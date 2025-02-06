@@ -470,13 +470,12 @@ main {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 0;
-    /* Start with 0 width */
     height: 0;
-    /* Start with 0 height */
     opacity: 0;
     transition: width 1s ease, height 1s ease, opacity 0.5s ease;
     z-index: 1000;
     pointer-events: none;
+    display: none;
 }
 
 /* Initial state: Images are faint but visible */
