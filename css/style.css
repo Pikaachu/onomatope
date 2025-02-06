@@ -265,17 +265,7 @@ main {
 /* === Voice command section === */
 
 #voice-toggle {
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 15px;
-    transition-duration: .2s;
-    cursor: pointer;
-    background-color: var(--light-blue);
-    box-shadow: 0 6px var(--primary-blue);
-    font-size: 1rem;
-    display: block;
-    font-weight: 900; 
+  display: none;
 }
 
 #voice-toggle:hover {
