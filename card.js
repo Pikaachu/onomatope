@@ -277,10 +277,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		transition: background-color 0.3s;
 	  }
 	  .fa-microphone:hover {
-		background-color: #d1e7dd;
+		background-color: #f79b99;
 	  }
 	  .fa-microphone.playing {
-	    background-color: #f79b99;
 		box-shadow: 0 0 8px rgba(0,0,0,0.2);
 	  }
 	  .fa-volume-low.playing {
