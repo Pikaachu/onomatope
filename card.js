@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
 	  // マイクONカラー
 	  if (isRecognizing) {
-		micIcon.style.backgroundColor = "#d1e7dd";
+		micIcon.style.backgroundColor = "#f79b99"; 
 		micIcon.classList.add('playing');
 	  } else {
 		micIcon.style.backgroundColor = "#f0f0f0";
@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		transition: background-color 0.3s;
 	  }
 	  .fa-microphone:hover {
-		background-color: #f79b99;
+		background-color: #d1e7dd;
 	  }
 	  .fa-microphone.playing {
 		box-shadow: 0 0 8px rgba(0,0,0,0.2);
