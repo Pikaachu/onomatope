@@ -280,6 +280,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		background-color: #d1e7dd;
 	  }
 	  .fa-microphone.playing {
+	    background-color: #f79b99;
 		box-shadow: 0 0 8px rgba(0,0,0,0.2);
 	  }
 	  .fa-volume-low.playing {
