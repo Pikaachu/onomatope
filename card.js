@@ -253,6 +253,9 @@ document.addEventListener("DOMContentLoaded", function () {
 			updateFavoriteButton();
 		  }
 		}
+		  else if (transcript.includes("閉じる") || transcript.includes("説明を閉じる")) {
+			closeExplanation();
+		  }
 		lastCommandTime = currentTime;
 	  }
 	};
