@@ -102,7 +102,7 @@
             </div>
 
             <!-- for マイク  -->
-            <button id="voice-toggle" class="mic-container">音声コマンドをオン</button>
+            <!-- s -->
         </main>
         
         <!-- js -->
