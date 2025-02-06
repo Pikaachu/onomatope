@@ -98,6 +98,7 @@ main {
     font-size: 1.4rem; 
     padding: 18px 36px; 
     display: block; 
+    width: 200px;
 }
 
 #main-menu main .btn-main-menu:hover { 
