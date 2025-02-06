@@ -396,8 +396,6 @@ main {
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: 0px;
-    margin-top: 80px;
-    padding-bottom: 10px;
 }
 
 .box-c {
