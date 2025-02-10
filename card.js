@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-	// DOM Elements
 	const container = document.getElementById("card-container");
 	const categoryList = document.getElementById("category-list");
 	const prevButton = document.getElementById("btn-prev");
@@ -12,10 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	const favoriteButton = document.querySelector('.fa-heart');
 	const categoryButton = document.getElementById("btn-category");
   
-	// Answer
 	let currentAnswer;
-	
-	// Variables to track state
+
 	let currentIndex = 0;
 	let currentData = [];
 	let isRecognizing = false;
@@ -33,14 +30,14 @@ document.addEventListener("DOMContentLoaded", function () {
 	recognition.continuous = true;
 	recognition.interimResults = true;
 	
-	// お気に入り localStorage
+	// お気に入り
 	const favoriteList = JSON.parse(localStorage.getItem("favorites")) || [];
 	
-	// Helper: Update the user-speech field with a message
+	//user-speech
 	function updateUserSpeech(message) {
 	  const userSpeechEl = document.getElementById('user-speech');
 	  userSpeechEl.textContent = message;
-	  // Optionally, clear the message after 3 seconds
+	  // clear the message after 3 seconds
 	  setTimeout(() => {
 		userSpeechEl.textContent = "";
 	  }, 3000);
@@ -110,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		  card.classList.remove("active");
 		}
 	  });
-	  // Clear any previous speech message
+	  // Clear previous message
 	  document.getElementById('user-speech').textContent = ''; 
 	  updateFavoriteButton();
 	}
@@ -121,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	function updateFavoriteButton() {
 	  const currentItem = currentData[currentIndex];
 	  if (currentItem && favoriteList.includes(currentItem.id)) {
-		favoriteButton.style.color = "red"; // Favorite = red
+		favoriteButton.style.color = "red";
 	  } else {
 		favoriteButton.style.color = "";
 	  }
@@ -133,11 +130,9 @@ document.addEventListener("DOMContentLoaded", function () {
 	  const itemId = currentItem.id;
 	  const index = favoriteList.indexOf(itemId);
 	  if (index > -1) {
-		// Remove from favorites
 		favoriteList.splice(index, 1);
 		updateUserSpeech("お気に入りから削除されました");
 	  } else {
-		// Add to favorites
 		favoriteList.push(itemId);
 		updateUserSpeech("お気に入りに追加されました");
 	  }
@@ -196,22 +191,17 @@ document.addEventListener("DOMContentLoaded", function () {
 	  updateUserSpeech("次のカードに移動します");
 	});
 	
-	// Example: If you want to show a message when the volume (audio) button is clicked
 	volumeButton.addEventListener("click", function () {
-	  // Assume your audio playback logic is handled here or in another function (like playAudio())
-	  // playAudio();
 	  updateUserSpeech("音声を再生します");
 	});
 	
-	// For the category button (if you want to display a message before navigating)
 	categoryButton.addEventListener("click", function (e) {
-	  // Optionally, prevent immediate navigation so the user can see the message
 	  e.preventDefault();
 	  updateUserSpeech("カテゴリー画面に移動します");
 	  // Delay navigation a bit (e.g., 1 second) to show the message
 	  setTimeout(() => {
 		window.location.href = categoryButton.getAttribute("href");
-	  }, 1000);
+	  }, 2000);
 	});
 	
 	// -----------------------------
@@ -295,7 +285,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 		
 		if (!commandRecognized) {
-		  // If no specific command is recognized, show the transcript.
 		  updateUserSpeech("認識: " + transcript);
 		}
 		lastCommandTime = currentTime;
@@ -331,8 +320,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	// -----------------------------
 	fetchData();
   });
-  
-  // Helper function to convert Hiragana to Katakana
   function hiraganaToKatagana(input) {
 	return input.replace(/[ぁ-ん]/g, (match) => {
 	  return String.fromCharCode(match.charCodeAt(0) + 0x60);
