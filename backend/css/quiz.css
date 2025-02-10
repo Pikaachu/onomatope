@@ -304,7 +304,7 @@ h1{
 .flex-box-top {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .right-hand{
