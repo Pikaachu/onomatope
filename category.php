@@ -236,7 +236,7 @@
 
                     } else if (position === "bottom-right") {
                         hoverImage.style.bottom = "10px";
-                        hoverImage.style.right = "10px";
+                        hoverImage.style.right = "70px";
 
 
 
