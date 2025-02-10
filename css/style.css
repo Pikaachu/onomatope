@@ -128,8 +128,8 @@ main {
 /* === Card Page === */
 
 #flash-card main {
-    height: calc(100% - 60px);
-    width: calc(100% - 60px);
+    height: calc(100% - 40px);
+    width: calc(100% - 40px);
     padding: 20px;
     gap: 20px;
     box-sizing: border-box;
