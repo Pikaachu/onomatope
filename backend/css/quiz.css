@@ -267,14 +267,14 @@ main {
     margin-top: 10px;
 }
 
-main {
-    /*background-image: url(../images/emotion/well.jpg);
+/*main {
+    background-image: url(../images/emotion/well.jpg);
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: 25px;
-    background-size: 15%; */
+    background-size: 15%; 
     
-}
+}*/
 
 img {
     border-radius: 40px;
