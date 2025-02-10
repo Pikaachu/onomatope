@@ -96,7 +96,7 @@ def handle_audio_chunk(audio_data):
               # Apply emotion weights to adjust emotion probabilities
             emotion_weights = {
                 "元気もりもり": 1.5,  # Boost happiness detection
-                "とても元気": 0.8,
+                "とても元気": 0.2,
                 "元気": 0.5,
                 "穏やか": 0.3,
                 "無感情": 0.1
