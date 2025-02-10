@@ -15,7 +15,12 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-
+      .mic-container{
+      
+       
+        z-index: 2;
+      }
+    
         /* Horizontal and Vertical Lines */
         main::before,
         main::after {
@@ -97,7 +102,7 @@
             </div>
 
             <!-- for マイク  -->
-            <button id="voice-toggle">音声コマンドをオン</button>
+            
         </main>
         
         <!-- js -->

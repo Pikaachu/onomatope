@@ -22,7 +22,7 @@
             </div>
             <div class="sub-links">
                 <a href="category.php" class="btn btn-sub-menu">カテゴリー</a>
-                <a href="backend/quiz.php" class="btn btn-sub-menu">ドキドキクイズ</a>
+                <a href="backend/quiz.php" class="btn btn-sub-menu">コツコツクイズ</a>
             </div>
             
             <button id="voice-toggle">音声コマンドをオン</button>

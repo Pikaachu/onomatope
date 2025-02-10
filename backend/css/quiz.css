@@ -198,8 +198,8 @@ main {
 
 /* === Flash Card Page === */
 #flash-card main {
-    height: calc(100% - 30px);
-    width: calc(100% - 30px);
+    height: calc(100% - 40px);
+    width: calc(100% - 40px);
     padding: 60px 80px 60px 180px;
 
     box-sizing: border-box;
@@ -267,14 +267,14 @@ main {
     margin-top: 10px;
 }
 
-main {
-    /*background-image: url(../images/emotion/well.jpg);
+/*main {
+    background-image: url(../images/emotion/well.jpg);
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: 25px;
-    background-size: 15%; */
+    background-size: 15%; 
     
-}
+}*/
 
 img {
     border-radius: 40px;

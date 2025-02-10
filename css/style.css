@@ -98,6 +98,7 @@ main {
     font-size: 1.4rem; 
     padding: 18px 36px; 
     display: block; 
+    width: 200px;
 }
 
 #main-menu main .btn-main-menu:hover { 
@@ -127,13 +128,17 @@ main {
 /* === Card Page === */
 
 #flash-card main {
-    height: calc(100% - 50px);
-    width: calc(100% - 50px);
+    height: calc(100% - 40px);
+    width: calc(100% - 40px);
     padding: 20px;
     gap: 20px;
     box-sizing: border-box;
     flex-direction: column;
     position: relative;
+}
+
+#flash-card .wrapper {
+	overflow: hidden;
 }
  
 #flash-card .card {
@@ -391,8 +396,6 @@ main {
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: 0px;
-    margin-top: 80px;
-    padding-bottom: 10px;
 }
 
 .box-c {
@@ -431,7 +434,7 @@ main {
 }
 
 .top-right:hover {
-    box-shadow: 0px 0px var(--priamry-blue);
+    box-shadow: 0px 0px var(--primary-blue);
     top: 2px;
 
 }
@@ -466,13 +469,12 @@ main {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 0;
-    /* Start with 0 width */
     height: 0;
-    /* Start with 0 height */
     opacity: 0;
     transition: width 1s ease, height 1s ease, opacity 0.5s ease;
     z-index: 1000;
     pointer-events: none;
+    display: none;
 }
 
 /* Initial state: Images are faint but visible */

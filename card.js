@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	const explanationPopup = document.getElementById("explanation-popup");
 	const popupOverlay = document.getElementById("popup-overlay");
 	const favoriteButton = document.querySelector('.fa-heart');
+	const categoryButton = document.getElementById("btn-category");
+
 
 	// Answer
 	let currentAnswer;
@@ -196,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
 	  // マイクONカラー
 	  if (isRecognizing) {
-		micIcon.style.backgroundColor = "#d1e7dd";
+		micIcon.style.backgroundColor = "#f79b99"; 
 		micIcon.classList.add('playing');
 	  } else {
 		micIcon.style.backgroundColor = "#f0f0f0";
@@ -238,6 +240,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		  stopAudio();
 		} else if (transcript.includes("説明") || transcript.includes("意味")) {
 		  explanationButton.click();
+		} else if (transcript.includes("カテゴリー") || transcript.includes("カテゴリ")) {
+			categoryButton.click();
 		} else if (transcript.includes("お気に入り") || transcript.includes("お気に入り追加")) {
 		  // Toggle favorites for current item
 		  const currentItem = currentData[currentIndex];
@@ -253,6 +257,9 @@ document.addEventListener("DOMContentLoaded", function () {
 			updateFavoriteButton();
 		  }
 		}
+		  else if (transcript.includes("閉じる") || transcript.includes("説明を閉じる")) {
+			closeExplanation();
+		  }
 		lastCommandTime = currentTime;
 	  }
 	};
@@ -273,7 +280,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		background-color: #d1e7dd;
 	  }
 	  .fa-microphone.playing {
-		/* Optionally, add extra styles when active */
 		box-shadow: 0 0 8px rgba(0,0,0,0.2);
 	  }
 	  .fa-volume-low.playing {

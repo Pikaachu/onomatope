@@ -4,10 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const links = {
         'わくわく': 'card.php',
         'わくわくコース': 'card.php',
-        'ドキドキ': '#dokidoki',
-        'ドキドキことば': '#dokidoki',
-        'コツコツ': 'quiz.php',
-        'コツコツクイズ': 'quiz.php'
+        'カテゴリー': 'category.php',
+        'ドキドキカテゴリー': 'category.php',
+        'クイズ': 'backend/quiz.php',
+        'コツコツクイズ': 'backend/quiz.php'
     };
 
     if (!('webkitSpeechRecognition' in window)) {
