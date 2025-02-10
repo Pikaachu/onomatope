@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	categoryButton.addEventListener("click", function (e) {
 	  e.preventDefault();
 	  updateUserSpeech("カテゴリー画面に移動します");
-	  // Delay navigation a bit (e.g., 1 second) to show the message
+	  // Delay navigation
 	  setTimeout(() => {
 		window.location.href = categoryButton.getAttribute("href");
 	  }, 2000);
