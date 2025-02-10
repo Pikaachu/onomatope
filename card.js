@@ -12,10 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	const favoriteButton = document.querySelector('.fa-heart');
 	const categoryButton = document.getElementById("btn-category");
   
-	// Answer
 	let currentAnswer;
 	
-	// Variables to track state
 	let currentIndex = 0;
 	let currentData = [];
 	let isRecognizing = false;
@@ -33,14 +31,14 @@ document.addEventListener("DOMContentLoaded", function () {
 	recognition.continuous = true;
 	recognition.interimResults = true;
 	
-	// お気に入り localStorage
+	// お気に入り 
 	const favoriteList = JSON.parse(localStorage.getItem("favorites")) || [];
 	
-	// Helper: Update the user-speech field with a message
+	// Text field
 	function updateUserSpeech(message) {
 	  const userSpeechEl = document.getElementById('user-speech');
 	  userSpeechEl.textContent = message;
-	  // Optional: Clear the message after 3 seconds
+	  // Clear the message after 3 seconds
 	  setTimeout(() => {
 		userSpeechEl.textContent = "";
 	  }, 3000);
@@ -110,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		  card.classList.remove("active");
 		}
 	  });
-	  // Clear any previous speech message
+	  // Clear previous speech message
 	  document.getElementById('user-speech').textContent = ''; 
 	  updateFavoriteButton();
 	}
@@ -133,11 +131,9 @@ document.addEventListener("DOMContentLoaded", function () {
 	  const itemId = currentItem.id;
 	  const index = favoriteList.indexOf(itemId);
 	  if (index > -1) {
-		// Remove from favorites
 		favoriteList.splice(index, 1);
 		updateUserSpeech("お気に入りから削除されました");
 	  } else {
-		// Add to favorites
 		favoriteList.push(itemId);
 		updateUserSpeech("お気に入りに追加されました");
 	  }
@@ -251,7 +247,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		  commandRecognized = true;
 		  window.location.href = "index.php";
 		} else if (transcript.includes("聴く") || transcript.includes("聞く") || transcript.includes("音声") || userAnswer.includes(currentAnswer)) {
-		  // Ensure you call the correct button (here volumeButton)
 		  volumeButton.click();
 		  updateUserSpeech("音声を再生します");
 		  commandRecognized = true;
@@ -290,7 +285,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 		
 		if (!commandRecognized) {
-		  // If no specific command is recognized, you can still show the transcript
 		  updateUserSpeech("認識: " + transcript);
 		}
 		lastCommandTime = currentTime;
@@ -328,7 +322,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	
   });
   
-  // Helper function to convert Hiragana to Katakana
   function hiraganaToKatagana(input) {
 	return input.replace(/[ぁ-ん]/g, (match) => {
 		// ひらがなをカタカナに変換
