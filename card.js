@@ -11,19 +11,18 @@ document.addEventListener("DOMContentLoaded", function () {
 	const popupOverlay = document.getElementById("popup-overlay");
 	const favoriteButton = document.querySelector('.fa-heart');
 	const categoryButton = document.getElementById("btn-category");
-
-
+  
 	// Answer
 	let currentAnswer;
-  
+	
 	// Variables to track state
 	let currentIndex = 0;
 	let currentData = [];
 	let isRecognizing = false;
 	let lastCommandTime = 0;
 	const cooldownTime = 500; // 500ms between commands initially
-  
-	// 音声認識　SET UP
+	
+	// 音声認識 SET UP
 	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 	if (!SpeechRecognition) {
 	  alert("このブラウザーは音声認識をサポートしていません。");
@@ -33,21 +32,31 @@ document.addEventListener("DOMContentLoaded", function () {
 	recognition.lang = 'ja-JP';
 	recognition.continuous = true;
 	recognition.interimResults = true;
-  
-	// お気に入り　localStorage
+	
+	// お気に入り localStorage
 	const favoriteList = JSON.parse(localStorage.getItem("favorites")) || [];
-  
+	
+	// Helper: Update the user-speech field with a message
+	function updateUserSpeech(message) {
+	  const userSpeechEl = document.getElementById('user-speech');
+	  userSpeechEl.textContent = message;
+	  // Optional: Clear the message after 3 seconds
+	  setTimeout(() => {
+		userSpeechEl.textContent = "";
+	  }, 3000);
+	}
+	
 	// -----------------------------
 	// Data Fetching and Carousel
 	// -----------------------------
 	function fetchData(categoryId = 0) {
-	const xhr = new XMLHttpRequest();
-	const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
-	const category = urlParams.get('category')
-	if (category) {
+	  const xhr = new XMLHttpRequest();
+	  const queryString = window.location.search;
+	  const urlParams = new URLSearchParams(queryString);
+	  const category = urlParams.get('category')
+	  if (category) {
 		categoryId = category;
-	}
+	  }
 	  xhr.open("GET", `db_get_onomatope.php?category_id=${categoryId}`, true);
 	  xhr.onload = function () {
 		if (xhr.status === 200) {
@@ -70,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	  };
 	  xhr.send();
 	}
-  
+	
 	function displayData(data) {
 	  container.innerHTML = "";
 	  if (data && Array.isArray(data)) {
@@ -91,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	  }
 	}
-  
+	
 	function updateCarousel() {
 	  const cards = document.querySelectorAll(".card");
 	  cards.forEach((card, index) => {
@@ -101,39 +110,41 @@ document.addEventListener("DOMContentLoaded", function () {
 		  card.classList.remove("active");
 		}
 	  });
-	  document.getElementById('user-speech').textContent = '';    //テキストフィールドの空白にする
+	  // Clear any previous speech message
+	  document.getElementById('user-speech').textContent = ''; 
 	  updateFavoriteButton();
 	}
-  
+	
 	// -----------------------------
-	// お気に入り　ボタン
+	// お気に入り ボタン
 	// -----------------------------
 	function updateFavoriteButton() {
-	  // お気に入りのリストチェック
 	  const currentItem = currentData[currentIndex];
 	  if (currentItem && favoriteList.includes(currentItem.id)) {
-		favoriteButton.style.color = "red"; // 入っている　＝　赤
+		favoriteButton.style.color = "red"; // Favorite = red
 	  } else {
-		favoriteButton.style.color = ""; //　入ってない　＝　普通
+		favoriteButton.style.color = "";
 	  }
 	}
-  
+	
 	favoriteButton.addEventListener("click", function () {
 	  const currentItem = currentData[currentIndex];
 	  if (!currentItem) return;
 	  const itemId = currentItem.id;
 	  const index = favoriteList.indexOf(itemId);
 	  if (index > -1) {
-		//　お気に入りから削除
+		// Remove from favorites
 		favoriteList.splice(index, 1);
+		updateUserSpeech("お気に入りから削除されました");
 	  } else {
-		//　お気に入りに追加
+		// Add to favorites
 		favoriteList.push(itemId);
+		updateUserSpeech("お気に入りに追加されました");
 	  }
 	  localStorage.setItem("favorites", JSON.stringify(favoriteList));
 	  updateFavoriteButton();
 	});
-  
+	
 	// -----------------------------
 	// Explanation Popup
 	// -----------------------------
@@ -149,14 +160,14 @@ document.addEventListener("DOMContentLoaded", function () {
 		popupOverlay.style.display = 'block';
 	  }
 	});
-  
+	
 	document.getElementById('close-explanation').addEventListener("click", closeExplanation);
 	popupOverlay.addEventListener("click", closeExplanation);
 	function closeExplanation() {
 	  explanationPopup.style.display = 'none';
 	  popupOverlay.style.display = 'none';
 	}
-  
+	
 	// -----------------------------
 	// Carousel Navigation Buttons
 	// -----------------------------
@@ -164,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	  const selectedCategory = parseInt(categoryList.value, 10);
 	  fetchData(selectedCategory);
 	});
-  
+	
 	prevButton.addEventListener("click", function () {
 	  const dataLength = container.children.length;
 	  currentIndex = (currentIndex - 1 + dataLength) % dataLength;
@@ -172,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	  let cardActive = document.querySelectorAll(".card.active");
 	  currentAnswer = hiraganaToKatagana(cardActive[0].querySelector("h1").innerText);
 	});
-  
+	
 	nextButton.addEventListener("click", function () {
 	  const dataLength = container.children.length;
 	  currentIndex = (currentIndex + 1) % dataLength;
@@ -180,22 +191,20 @@ document.addEventListener("DOMContentLoaded", function () {
 	  let cardActive = document.querySelectorAll(".card.active");
 	  currentAnswer = hiraganaToKatagana(cardActive[0].querySelector("h1").innerText);
 	});
-  
+	
 	// -----------------------------
-	// 音声認識　＆　ボイスコマンド
+	// 音声認識＆ボイスコマンド
 	// -----------------------------
 	micIcon.addEventListener('click', function () {
-		
 	  if (isRecognizing) {
 		recognition.stop();
 	  } else {
 		recognition.start();
-		// Answer
 		let cardActive = document.querySelectorAll(".card.active");
 		currentAnswer = hiraganaToKatagana(cardActive[0].querySelector("h1").innerText);
 	  }
 	  isRecognizing = !isRecognizing;
-  
+	
 	  // マイクONカラー
 	  if (isRecognizing) {
 		micIcon.style.backgroundColor = "#f79b99"; 
@@ -205,67 +214,91 @@ document.addEventListener("DOMContentLoaded", function () {
 		micIcon.classList.remove('playing');
 	  }
 	});
-  
+	
 	recognition.onstart = function () {
 	  console.log('Voice recognition started.');
 	};
-  
+	
 	recognition.onend = function () {
 	  console.log('Voice recognition ended.');
 	};
-  
+	
 	recognition.onresult = function (event) {
 	  const currentTime = Date.now();
 	  if (currentTime - lastCommandTime < cooldownTime) return;
-  
+	
 	  const resultIndex = event.results.length - 1;
 	  const transcript = event.results[resultIndex][0].transcript.trim();
 	  const isFinal = event.results[resultIndex].isFinal;
-  
+	
 	  if (isFinal) {
-		document.getElementById('user-speech').textContent = transcript;
+		let commandRecognized = false;
+		// Remove or comment out the original transcript display line:
+		// document.getElementById('user-speech').textContent = transcript;
+		
 		let userAnswer = hiraganaToKatagana(transcript);
-  
-		// Command parsing (using simple substring matching)
+	
 		if (transcript.includes("次")) {
 		  nextButton.click();
+		  updateUserSpeech("次のカードに移動します");
+		  commandRecognized = true;
 		} else if (transcript.includes("前")) {
 		  prevButton.click();
+		  updateUserSpeech("前のカードに移動します");
+		  commandRecognized = true;
 		} else if (transcript.includes("戻る") || transcript.includes("ホーム")) {
+		  updateUserSpeech("ホームに戻ります");
+		  commandRecognized = true;
 		  window.location.href = "index.php";
 		} else if (transcript.includes("聴く") || transcript.includes("聞く") || transcript.includes("音声") || userAnswer.includes(currentAnswer)) {
-		  // Toggle audio playback
-		  btn.click();
+		  // Ensure you call the correct button (here volumeButton)
+		  volumeButton.click();
+		  updateUserSpeech("音声を再生します");
+		  commandRecognized = true;
 		} else if (transcript.includes("止める") || transcript.includes("とめる") || transcript.includes("停止")) {
 		  stopAudio();
+		  updateUserSpeech("音声を停止しました");
+		  commandRecognized = true;
 		} else if (transcript.includes("説明") || transcript.includes("意味")) {
 		  explanationButton.click();
+		  updateUserSpeech("説明を表示します");
+		  commandRecognized = true;
 		} else if (transcript.includes("カテゴリー") || transcript.includes("カテゴリ")) {
-			categoryButton.click();
+		  categoryButton.click();
+		  updateUserSpeech("カテゴリー画面に移動します");
+		  commandRecognized = true;
 		} else if (transcript.includes("お気に入り") || transcript.includes("お気に入り追加")) {
-		  // Toggle favorites for current item
 		  const currentItem = currentData[currentIndex];
 		  if (currentItem) {
 			const itemId = currentItem.id;
 			const idx = favoriteList.indexOf(itemId);
 			if (idx === -1) {
 			  favoriteList.push(itemId);
+			  updateUserSpeech("お気に入りに追加されました");
 			} else {
 			  favoriteList.splice(idx, 1);
+			  updateUserSpeech("お気に入りから削除されました");
 			}
 			localStorage.setItem("favorites", JSON.stringify(favoriteList));
 			updateFavoriteButton();
+			commandRecognized = true;
 		  }
+		} else if (transcript.includes("閉じる") || transcript.includes("説明を閉じる")) {
+		  closeExplanation();
+		  updateUserSpeech("説明を閉じます");
+		  commandRecognized = true;
 		}
-		  else if (transcript.includes("閉じる") || transcript.includes("説明を閉じる")) {
-			closeExplanation();
-		  }
+		
+		if (!commandRecognized) {
+		  // If no specific command is recognized, you can still show the transcript
+		  updateUserSpeech("認識: " + transcript);
+		}
 		lastCommandTime = currentTime;
 	  }
 	};
-  
+	
 	// -----------------------------
-	// マイク　CSS
+	// マイク CSS
 	// -----------------------------
 	const micStyle = document.createElement("style");
 	micStyle.textContent = `
@@ -287,7 +320,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	  }
 	`;
 	document.head.appendChild(micStyle);
-  
+	
 	// -----------------------------
 	// Initial Data Fetch
 	// -----------------------------
@@ -295,9 +328,11 @@ document.addEventListener("DOMContentLoaded", function () {
 	
   });
   
+  // Helper function to convert Hiragana to Katakana
   function hiraganaToKatagana(input) {
-    return input.replace(/[ぁ-ん]/g, (match) => {
-        // ひらがなをカタカナに変換
-        return String.fromCharCode(match.charCodeAt(0) + 0x60);
-    });
-}
+	return input.replace(/[ぁ-ん]/g, (match) => {
+		// ひらがなをカタカナに変換
+		return String.fromCharCode(match.charCodeAt(0) + 0x60);
+	});
+  }
+  
