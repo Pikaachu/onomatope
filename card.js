@@ -12,13 +12,15 @@ document.addEventListener("DOMContentLoaded", function () {
 	const favoriteButton = document.querySelector('.fa-heart');
 	const categoryButton = document.getElementById("btn-category");
   
+	// Answer
 	let currentAnswer;
 	
+	// Variables to track state
 	let currentIndex = 0;
 	let currentData = [];
 	let isRecognizing = false;
 	let lastCommandTime = 0;
-	const cooldownTime = 500; // 500ms between commands initially
+	const cooldownTime = 500; // 500ms between commands
 	
 	// 音声認識 SET UP
 	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -31,14 +33,14 @@ document.addEventListener("DOMContentLoaded", function () {
 	recognition.continuous = true;
 	recognition.interimResults = true;
 	
-	// お気に入り 
+	// お気に入り localStorage
 	const favoriteList = JSON.parse(localStorage.getItem("favorites")) || [];
 	
-	// Text field
+	// Helper: Update the user-speech field with a message
 	function updateUserSpeech(message) {
 	  const userSpeechEl = document.getElementById('user-speech');
 	  userSpeechEl.textContent = message;
-	  // Clear the message after 3 seconds
+	  // Optionally, clear the message after 3 seconds
 	  setTimeout(() => {
 		userSpeechEl.textContent = "";
 	  }, 3000);
@@ -51,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	  const xhr = new XMLHttpRequest();
 	  const queryString = window.location.search;
 	  const urlParams = new URLSearchParams(queryString);
-	  const category = urlParams.get('category')
+	  const category = urlParams.get('category');
 	  if (category) {
 		categoryId = category;
 	  }
@@ -108,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		  card.classList.remove("active");
 		}
 	  });
-	  // Clear previous speech message
+	  // Clear any previous speech message
 	  document.getElementById('user-speech').textContent = ''; 
 	  updateFavoriteButton();
 	}
@@ -131,9 +133,11 @@ document.addEventListener("DOMContentLoaded", function () {
 	  const itemId = currentItem.id;
 	  const index = favoriteList.indexOf(itemId);
 	  if (index > -1) {
+		// Remove from favorites
 		favoriteList.splice(index, 1);
 		updateUserSpeech("お気に入りから削除されました");
 	  } else {
+		// Add to favorites
 		favoriteList.push(itemId);
 		updateUserSpeech("お気に入りに追加されました");
 	  }
@@ -154,6 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		`;
 		explanationPopup.style.display = 'block';
 		popupOverlay.style.display = 'block';
+		updateUserSpeech("説明を表示します");
 	  }
 	});
 	
@@ -162,6 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	function closeExplanation() {
 	  explanationPopup.style.display = 'none';
 	  popupOverlay.style.display = 'none';
+	  updateUserSpeech("説明を閉じます");
 	}
 	
 	// -----------------------------
@@ -178,6 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	  updateCarousel();
 	  let cardActive = document.querySelectorAll(".card.active");
 	  currentAnswer = hiraganaToKatagana(cardActive[0].querySelector("h1").innerText);
+	  updateUserSpeech("前のカードに移動します");
 	});
 	
 	nextButton.addEventListener("click", function () {
@@ -186,6 +193,25 @@ document.addEventListener("DOMContentLoaded", function () {
 	  updateCarousel();
 	  let cardActive = document.querySelectorAll(".card.active");
 	  currentAnswer = hiraganaToKatagana(cardActive[0].querySelector("h1").innerText);
+	  updateUserSpeech("次のカードに移動します");
+	});
+	
+	// Example: If you want to show a message when the volume (audio) button is clicked
+	volumeButton.addEventListener("click", function () {
+	  // Assume your audio playback logic is handled here or in another function (like playAudio())
+	  // playAudio();
+	  updateUserSpeech("音声を再生します");
+	});
+	
+	// For the category button (if you want to display a message before navigating)
+	categoryButton.addEventListener("click", function (e) {
+	  // Optionally, prevent immediate navigation so the user can see the message
+	  e.preventDefault();
+	  updateUserSpeech("カテゴリー画面に移動します");
+	  // Delay navigation a bit (e.g., 1 second) to show the message
+	  setTimeout(() => {
+		window.location.href = categoryButton.getAttribute("href");
+	  }, 1000);
 	});
 	
 	// -----------------------------
@@ -229,9 +255,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	
 	  if (isFinal) {
 		let commandRecognized = false;
-		// Remove or comment out the original transcript display line:
-		// document.getElementById('user-speech').textContent = transcript;
-		
 		let userAnswer = hiraganaToKatagana(transcript);
 	
 		if (transcript.includes("次")) {
@@ -263,21 +286,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		  updateUserSpeech("カテゴリー画面に移動します");
 		  commandRecognized = true;
 		} else if (transcript.includes("お気に入り") || transcript.includes("お気に入り追加")) {
-		  const currentItem = currentData[currentIndex];
-		  if (currentItem) {
-			const itemId = currentItem.id;
-			const idx = favoriteList.indexOf(itemId);
-			if (idx === -1) {
-			  favoriteList.push(itemId);
-			  updateUserSpeech("お気に入りに追加されました");
-			} else {
-			  favoriteList.splice(idx, 1);
-			  updateUserSpeech("お気に入りから削除されました");
-			}
-			localStorage.setItem("favorites", JSON.stringify(favoriteList));
-			updateFavoriteButton();
-			commandRecognized = true;
-		  }
+		  favoriteButton.click();
+		  commandRecognized = true;
 		} else if (transcript.includes("閉じる") || transcript.includes("説明を閉じる")) {
 		  closeExplanation();
 		  updateUserSpeech("説明を閉じます");
@@ -285,6 +295,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 		
 		if (!commandRecognized) {
+		  // If no specific command is recognized, show the transcript.
 		  updateUserSpeech("認識: " + transcript);
 		}
 		lastCommandTime = currentTime;
@@ -319,13 +330,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	// Initial Data Fetch
 	// -----------------------------
 	fetchData();
-	
   });
   
+  // Helper function to convert Hiragana to Katakana
   function hiraganaToKatagana(input) {
 	return input.replace(/[ぁ-ん]/g, (match) => {
-		// ひらがなをカタカナに変換
-		return String.fromCharCode(match.charCodeAt(0) + 0x60);
+	  return String.fromCharCode(match.charCodeAt(0) + 0x60);
 	});
   }
   
