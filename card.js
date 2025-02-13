@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	  // Delay navigation
 	  setTimeout(() => {
 		window.location.href = categoryButton.getAttribute("href");
-	  }, 2000);
+	  }, 1000);
 	});
 	
 	// -----------------------------
