@@ -308,6 +308,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		  commandRecognized = true;
 		} else if (
 		  normalizedTranscript.includes("閉じる") ||
+		  normalizedTranscript.includes("閉じて") ||
 		  normalizedTranscript.includes("説明を閉じる")
 		) {
 		  closeExplanation();
@@ -316,7 +317,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	
 		if (!commandRecognized) {
-		  updateUserSpeech("認識: " + normalizedTranscript);
+		  updateUserSpeech("認識:" + normalizedTranscript);
 		}
 	  }
 	};
