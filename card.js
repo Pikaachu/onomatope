@@ -12,14 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
 	const categoryButton = document.getElementById("btn-category");
   
 	let currentAnswer;
-
 	let currentIndex = 0;
 	let currentData = [];
 	let isRecognizing = false;
 	let lastCommandTime = 0;
 	const cooldownTime = 500; // 500ms between commands
-	
-	// 音声認識 SET UP
+  
+	// Setup Speech Recognition
 	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 	if (!SpeechRecognition) {
 	  alert("このブラウザーは音声認識をサポートしていません。");
@@ -30,21 +29,24 @@ document.addEventListener("DOMContentLoaded", function () {
 	recognition.continuous = true;
 	recognition.interimResults = true;
 	
-	// お気に入り
+	// -----------------------------
+	// Favorite List
+	// -----------------------------
 	const favoriteList = JSON.parse(localStorage.getItem("favorites")) || [];
-	
-	//user-speech
+  
+	// -----------------------------
+	// User Speech
+	// -----------------------------
 	function updateUserSpeech(message) {
 	  const userSpeechEl = document.getElementById('user-speech');
 	  userSpeechEl.textContent = message;
-	  // clear the message after 3 seconds
 	  setTimeout(() => {
 		userSpeechEl.textContent = "";
 	  }, 3000);
 	}
-	
+  
 	// -----------------------------
-	// Data Fetching and Carousel
+	// Data Fetch
 	// -----------------------------
 	function fetchData(categoryId = 0) {
 	  const xhr = new XMLHttpRequest();
@@ -107,13 +109,12 @@ document.addEventListener("DOMContentLoaded", function () {
 		  card.classList.remove("active");
 		}
 	  });
-	  // Clear previous message
 	  document.getElementById('user-speech').textContent = ''; 
 	  updateFavoriteButton();
 	}
 	
 	// -----------------------------
-	// お気に入り ボタン
+	// お気に入り 色
 	// -----------------------------
 	function updateFavoriteButton() {
 	  const currentItem = currentData[currentIndex];
@@ -157,13 +158,14 @@ document.addEventListener("DOMContentLoaded", function () {
 	  }
 	});
 	
-	document.getElementById('close-explanation').addEventListener("click", closeExplanation);
-	popupOverlay.addEventListener("click", closeExplanation);
 	function closeExplanation() {
 	  explanationPopup.style.display = 'none';
 	  popupOverlay.style.display = 'none';
 	  updateUserSpeech("説明を閉じます");
 	}
+	
+	document.getElementById('close-explanation').addEventListener("click", closeExplanation);
+	popupOverlay.addEventListener("click", closeExplanation);
 	
 	// -----------------------------
 	// Carousel Navigation Buttons
@@ -177,8 +179,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	  const dataLength = container.children.length;
 	  currentIndex = (currentIndex - 1 + dataLength) % dataLength;
 	  updateCarousel();
-	  let cardActive = document.querySelectorAll(".card.active");
-	  currentAnswer = hiraganaToKatagana(cardActive[0].querySelector("h1").innerText);
+	  const cardActive = document.querySelector(".card.active");
+	  currentAnswer = hiraganaToKatagana(cardActive.querySelector("h1").innerText);
 	  updateUserSpeech("前のカードに移動します");
 	});
 	
@@ -186,8 +188,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	  const dataLength = container.children.length;
 	  currentIndex = (currentIndex + 1) % dataLength;
 	  updateCarousel();
-	  let cardActive = document.querySelectorAll(".card.active");
-	  currentAnswer = hiraganaToKatagana(cardActive[0].querySelector("h1").innerText);
+	  const cardActive = document.querySelector(".card.active");
+	  currentAnswer = hiraganaToKatagana(cardActive.querySelector("h1").innerText);
 	  updateUserSpeech("次のカードに移動します");
 	});
 	
@@ -205,19 +207,19 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 	
 	// -----------------------------
-	// 音声認識＆ボイスコマンド
+	// Voice Recognition & Commands
 	// -----------------------------
 	micIcon.addEventListener('click', function () {
-	  if (isRecognizing) {
-		recognition.stop();
-	  } else {
+	  if (!isRecognizing) {
 		recognition.start();
-		let cardActive = document.querySelectorAll(".card.active");
-		currentAnswer = hiraganaToKatagana(cardActive[0].querySelector("h1").innerText);
+		const cardActive = document.querySelector(".card.active");
+		currentAnswer = hiraganaToKatagana(cardActive.querySelector("h1").innerText);
+	  } else {
+		recognition.stop();
 	  }
 	  isRecognizing = !isRecognizing;
 	
-	  // マイクONカラー
+	  // Update mic icon style
 	  if (isRecognizing) {
 		micIcon.style.backgroundColor = "#f79b99"; 
 		micIcon.classList.add('playing');
@@ -229,70 +231,98 @@ document.addEventListener("DOMContentLoaded", function () {
 	
 	recognition.onstart = function () {
 	  console.log('Voice recognition started.');
+	document.getElementById('user-speech').textContent = "リスニング中...";
 	};
 	
 	recognition.onend = function () {
 	  console.log('Voice recognition ended.');
+	  micIcon.style.backgroundColor = "#f0f0f0";
+	  micIcon.classList.remove('playing');
+	  isRecognizing = false;
 	};
 	
 	recognition.onresult = function (event) {
-	  const currentTime = Date.now();
-	  if (currentTime - lastCommandTime < cooldownTime) return;
+	  let transcript = "";
+	  for (let i = event.resultIndex; i < event.results.length; i++) {
+		transcript += event.results[i][0].transcript;
+	  }
+	  document.getElementById('user-speech').textContent = transcript;
 	
-	  const resultIndex = event.results.length - 1;
-	  const transcript = event.results[resultIndex][0].transcript.trim();
-	  const isFinal = event.results[resultIndex].isFinal;
+	  if (event.results[event.results.length - 1].isFinal) {
+		const currentTime = Date.now();
+		if (currentTime - lastCommandTime < cooldownTime) return;
+		lastCommandTime = currentTime;
 	
-	  if (isFinal) {
 		let commandRecognized = false;
-		let userAnswer = hiraganaToKatagana(transcript);
+		const normalizedTranscript = transcript.trim();
+		const userAnswer = hiraganaToKatagana(normalizedTranscript);
 	
-		if (transcript.includes("次")) {
+		if (normalizedTranscript.includes("次")) {
 		  nextButton.click();
 		  updateUserSpeech("次のカードに移動します");
 		  commandRecognized = true;
-		} else if (transcript.includes("前")) {
+		} else if (normalizedTranscript.includes("前")) {
 		  prevButton.click();
 		  updateUserSpeech("前のカードに移動します");
 		  commandRecognized = true;
-		} else if (transcript.includes("戻る") || transcript.includes("ホーム")) {
+		} else if (normalizedTranscript.includes("戻る") || normalizedTranscript.includes("ホーム")) {
 		  updateUserSpeech("ホームに戻ります");
 		  commandRecognized = true;
 		  window.location.href = "index.php";
-		} else if (transcript.includes("聴く") || transcript.includes("聞く") || transcript.includes("音声") || userAnswer.includes(currentAnswer)) {
+		} else if (
+		  normalizedTranscript.includes("聴く") ||
+		  normalizedTranscript.includes("聞く") ||
+		  normalizedTranscript.includes("音声") ||
+		  userAnswer.includes(currentAnswer)
+		) {
 		  volumeButton.click();
 		  updateUserSpeech("音声を再生します");
 		  commandRecognized = true;
-		} else if (transcript.includes("止める") || transcript.includes("とめる") || transcript.includes("停止")) {
-		  stopAudio();
+		} else if (
+		  normalizedTranscript.includes("止める") ||
+		  normalizedTranscript.includes("とめる") ||
+		  normalizedTranscript.includes("停止")
+		) {
+		  stopAudio(); 
 		  updateUserSpeech("音声を停止しました");
 		  commandRecognized = true;
-		} else if (transcript.includes("説明") || transcript.includes("意味")) {
+		} else if (
+		  normalizedTranscript.includes("説明") ||
+		  normalizedTranscript.includes("意味")
+		) {
 		  explanationButton.click();
 		  updateUserSpeech("説明を表示します");
 		  commandRecognized = true;
-		} else if (transcript.includes("カテゴリー") || transcript.includes("カテゴリ")) {
+		} else if (
+		  normalizedTranscript.includes("カテゴリー") ||
+		  normalizedTranscript.includes("カテゴリ")
+		) {
 		  categoryButton.click();
 		  updateUserSpeech("カテゴリー画面に移動します");
 		  commandRecognized = true;
-		} else if (transcript.includes("お気に入り") || transcript.includes("お気に入り追加")) {
+		} else if (
+		  normalizedTranscript.includes("お気に入り") ||
+		  normalizedTranscript.includes("お気に入り追加")
+		) {
 		  favoriteButton.click();
 		  commandRecognized = true;
-		} else if (transcript.includes("閉じる") || transcript.includes("説明を閉じる")) {
+		} else if (
+		  normalizedTranscript.includes("閉じる") ||
+		  normalizedTranscript.includes("説明を閉じる")
+		) {
 		  closeExplanation();
 		  updateUserSpeech("説明を閉じます");
 		  commandRecognized = true;
 		}
-		
+	
 		if (!commandRecognized) {
-		  updateUserSpeech("認識: " + transcript);
+		  updateUserSpeech("認識: " + normalizedTranscript);
 		}
-		lastCommandTime = currentTime;
 	  }
 	};
 	
 	// -----------------------------
-	// マイク CSS
+	// Mic & Volume Button CSS
 	// -----------------------------
 	const micStyle = document.createElement("style");
 	micStyle.textContent = `
@@ -320,6 +350,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	// -----------------------------
 	fetchData();
   });
+	
   function hiraganaToKatagana(input) {
 	return input.replace(/[ぁ-ん]/g, (match) => {
 	  return String.fromCharCode(match.charCodeAt(0) + 0x60);
