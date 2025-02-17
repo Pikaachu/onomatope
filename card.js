@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	  userSpeechEl.textContent = message;
 	  setTimeout(() => {
 		userSpeechEl.textContent = "";
-	  }, 3000);
+	  }, 1500);
 	}
   
 	// -----------------------------
@@ -132,10 +132,10 @@ document.addEventListener("DOMContentLoaded", function () {
 	  const index = favoriteList.indexOf(itemId);
 	  if (index > -1) {
 		favoriteList.splice(index, 1);
-		updateUserSpeech("お気に入りから削除されました");
+		//updateUserSpeech("お気に入りから削除されました");
 	  } else {
 		favoriteList.push(itemId);
-		updateUserSpeech("お気に入りに追加されました");
+		//updateUserSpeech("お気に入りに追加されました");
 	  }
 	  localStorage.setItem("favorites", JSON.stringify(favoriteList));
 	  updateFavoriteButton();
